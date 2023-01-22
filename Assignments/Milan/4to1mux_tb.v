@@ -1,6 +1,6 @@
 `include "4to1mux.v"
-`timescale 1ns / 1ps
-module mux_tb;
+
+module mux_tb();
     // input lines
     reg [31:0] in0;
     reg [31:0] in1;
@@ -29,16 +29,24 @@ module mux_tb;
         in1 = 32'h00000002;
         in2 = 32'h00000004;
         in3 = 32'h00000008;
-
+        
+    end 
+      initial begin
         // Test all possible combinations of sel
-        for (sel = 0; sel < 4; sel = sel + 1) begin
-            // Print input and output values
-            $display("sel = %b, in0 = %h, in1 = %h, in2 = %h, in3 = %h, out = %h", sel, in0, in1, in2, in3, out);
-            #10;
+        // test cases
+        sel = 2'b00;
+        #5 $display("sel: %b, out: %h", sel, out);
+        sel= 2'b01;
+        #5 $display("sel: %b, out: %h", sel, out);
+        sel= 2'b10;
+        #5 $display("sel: %b, out: %h", sel, out);
+        sel= 2'b11;
+        #5 $display("sel: %b, out: %h", sel, out);
+        $finish;
         end
-        $stop;
-    end
-   
+        //test case ends
+        
+    
    
 
 endmodule
