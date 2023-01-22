@@ -3,6 +3,7 @@ module full_subtractor(
     output diff,
     output borrow_out
 );
-    assign diff = a ^ b ^ borrow_in;
-    assign borrow_out = (a & b) | (b & borrow_in) | (a & borrow_in);
+   assign diff = a ^ b ^ borrow_in;
+   assign borrow_out = (~a & b) | (b & borrow_in) | (~a & borrow_in);
+
 endmodule

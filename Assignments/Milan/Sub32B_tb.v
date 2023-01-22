@@ -1,31 +1,25 @@
 `include "Sub32B.v"
-module full_subtractor_tb;
+module subtractor_32bit_tb();
     reg [31:0] a, b;
     wire [31:0] diff;
-    wire borrow_out;
-    N_bit_Subtractor dut (a, b,  diff,borrow_out);
+
+    N_bit_Subtractor DUT(
+        .a(a),
+        .b(b),
+        .diff(diff)
+    );
 
     initial begin
-        a = 1200;
-        b = 1100;
-        #100;
-        $display("a=%d,b=%d and diff=%d",a,b,diff);
-        a = 32'h0000_0001;
-        b = 32'h0000_0001;
+        a = 32'h12345678;
+        b = 32'h87654321;
         #10;
-        $display("a=%d,b=%d and diff=%d",a,b,diff);
-        a = 32'h0000_0001;
-        b = 32'h0000_0010;
+        a = 32'hFFFFFFFF;
+        b = 32'h00000000;
         #10;
-        $display("a=%d,b=%d and diff=%d",a,b,diff);
-        a = 32'h0000_0010;
-        b = 32'h0000_0010;
-        #10;
-        $display("a=%d,b=%d and diff=%d",a,b,diff);
-        a = 32'h0000_0010;
-        b = 32'h0000_0001;
-        #10;
-        $display("a=%d,b=%d and diff=%d",a,b,diff);
-        $finish;
+        $stop;
+    end
+
+    initial begin
+        $monitor("a=%d b=%d diff=%d", a, b, diff);
     end
 endmodule
