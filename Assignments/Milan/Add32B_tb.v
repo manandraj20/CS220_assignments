@@ -18,10 +18,14 @@ module tb_N_bit_adder;
 
  initial begin
   // Initialize Inputs
-  input1 = 1200;
-  input2 = 4565;
-  #100;
+  input2 = 10;
+  input1 = 10;
+  #10;
   $display("input1=%d, input2=%d, answer=%d",input1,input2,answer);
+  input2 = 10;
+  input1 = 25;
+  #10;
+$display("input1=%d, input2=%d, answer=%d",input1,input2,answer);
   
   // Add stimulus here
  end

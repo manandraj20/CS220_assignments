@@ -1,6 +1,7 @@
 // fpga4student.com: FPGA projects, Verilog projects, VHDL projects
 // Verilog project: Verilog code for N-bit Adder 
 // Top Level Verilog code for N-bit Adder using Structural Modeling
+// `include "fullAdderS.v"
 module N_bit_adder(input1,input2,answer);
 parameter N=32;
 input [N-1:0] input1,input2;
@@ -11,10 +12,10 @@ input [N-1:0] input1,input2;
    generate 
    for(i=0;i<N;i=i+1)
      begin: generate_N_bit_Adder
-   if(i==0) 
-  half_adder f(input1[0],input2[0],answer[0],carry[0]);
+   if(i==0)
+   full_adder f(input1[i],~input2[i],1'b1, answer[i],carry[i]);
    else
-  full_adder f(input1[i],input2[i],carry[i-1],answer[i],carry[i]);
+  full_adder f(input1[i],~input2[i],carry[i-1],answer[i],carry[i]);
      end
   assign carry_out = carry[N-1];
    endgenerate
@@ -33,9 +34,11 @@ endmodule // half adder
 // fpga4student.com: FPGA projects, Verilog projects, VHDL projects
 // Verilog project: Verilog code for N-bit Adder 
 // Verilog code for full adder 
-module full_adder(x,y,c_in,s,c_out);
-   input x,y,c_in;
-   output s,c_out;
- assign s = (x^y) ^ c_in;
- assign c_out = (y&c_in)| (x&y) | (x&c_in);
+module full_adder(input a, b, cin, output sum, cout);
+   wire t1, t2,t3,t4;
+   xor X1(t1, a, b);
+   xor X2(sum, t1, cin);
+   and A1(t3, a, b);
+   and A2(t4, t1, cin);
+   or O1(cout, t3, t4);
 endmodule // full_adder

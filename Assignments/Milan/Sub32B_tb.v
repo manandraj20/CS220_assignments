@@ -10,11 +10,11 @@ module subtractor_32bit_tb();
     );
 
     initial begin
-        a = 32'h12345678;
-        b = 32'h87654321;
-        #10;
-        a = 32'hFFFFFFFF;
+        a = 32'h00000001;
         b = 32'h00000000;
+        #10;
+        a = 32'h00000003;
+        b = 32'h00000001;
         #10;
         $stop;
     end

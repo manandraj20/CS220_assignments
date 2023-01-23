@@ -28,7 +28,7 @@ module full_subtractor_tb();
         #10;
         a = 1; b = 1; borrow_in = 1;
         #10;
-        $stop;
+       
         $finish;
     end
 
