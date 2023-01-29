@@ -1,0 +1,42 @@
+
+9/1/23
+Asynchronous: always block has poserade reset and reset not only works at jumps in clock
+synchronous: remove the reset from always block
+
+XDC
+^
+|
+^
+UCF(user constraint file)
+
+Device: XC35500E
+Package: FG320
+Speed: -5
+Family: SPARTAN3E
+
+2 cables from FPGA to PC: one for power and other for detecting FPGA
+
+D flip-flop: reset=1 then output is 0 regardless of input.
+
+Write iverlog code -> synthesize-> Implementatiom (require UCF) -> gererate bit file
+write iverilog code ->simulation (with test bench)-> check correctness
+
+FPGA-> only works with flip flops and not with the gates
+
+Project:
+1. Name the project
+2. set the specifications correctly (device, package, speed, family)
+3. create a full_adder iverilog module
+4. No need to specify ports for module
+CODE: 
+module full_adder (a,b, cin,s, cout):
+input a,b, cin;
+output s,cout;
+assign (cout,s)=a+b+cin;
+5.Attach structural file to define the structure of adder (2 xor, or and and)
+
+Note: lookup table is a memory which stores the output. It depends on the number of input rather than the depth of circuit
+
+6. Add the UCF file
+7. Imlement the design
+8.

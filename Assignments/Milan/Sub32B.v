@@ -5,11 +5,12 @@ module N_bit_Subtractor(
     output [31:0] diff
 );
     wire[31:0] borrow_ot;
+    parameter K=32;
 
     // instantiate 32 full subtractors using a for loop
     genvar i;
     generate
-        for (i=0; i<32; i=i+1) begin: bit_sub
+        for (i=0; i<K; i=i+1) begin: bit_sub
         if (i==0)
         full_subtractor full_sub(.a(a[i]),.b(b[i]),.borrow_in(1'b0),.diff(diff[i]),.borrow_out(borrow_ot[i]));
         else

@@ -2,18 +2,19 @@
 // Verilog project: Verilog code for N-bit Adder 
 // Top Level Verilog code for N-bit Adder using Structural Modeling
 // `include "fullAdderS.v"
-module N_bit_adder(input1,input2,answer);
-parameter N=32;
+module N_bit_adder(input1,input2,answer,carry_out,carry_in);
+parameter N=16;
 input [N-1:0] input1,input2;
    output [N-1:0] answer;
-   wire  carry_out;
+   output  carry_out;
+   input carry_in;
   wire [N-1:0] carry;
    genvar i;
    generate 
    for(i=0;i<N;i=i+1)
      begin: generate_N_bit_Adder
    if(i==0)
-   full_adder f(input1[i],input2[i],1'b0, answer[i],carry[i]);
+   full_adder f(input1[i],input2[i],carry_in, answer[i],carry[i]);
    else
   full_adder f(input1[i],input2[i],carry[i-1],answer[i],carry[i]);
      end
